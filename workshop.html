@@ -15,12 +15,44 @@
         return x * x;
       }
 
-      squareOfTwo = square(2);
-      if (squareOfTwo == 6) {
-        console.log("test passed")
-      } else {
-        console.error("square function failed")
+      function equal(a,b, message = `Expected ${a} to equal ${b}`) {
+        if (a === b) {
+          console.info("Pass: " + message)
+        } else {
+          console.error("Fail: " + message)
+        }
       }
+
+      function notEqual(a,b, message = `Expected ${a} to not equal ${b}`) {
+        if (a != b) {
+          console.info("Pass: " + message) 
+        } else {
+          console.error("Fail: " + message)
+        }
+      }
+
+      //Why must the values of this object not be used with curly brackets?
+      const tests = {
+        equal: equal(),
+        notEqual: notEqual()
+      }
+
+      function test(name, testFunction) {
+        console.group(name);
+        testFunction(tests);
+        console.groupEnd();
+      }
+
+      test("Correctly squares integers", t => {
+        const result = square(2);
+        const expected = 6
+        t.equal(result, expected);
+      })
+
+      console.log(Object.entries(tests));
+      console.log(Object.keys(tests));
+      console.log(Object.values(tests));
+
 
 
     </script>
